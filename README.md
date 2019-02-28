@@ -13,3 +13,10 @@ Case STL files in Case folder.
 Use IDE uVision Keil ARM-MDK Professional and open project file F7.uvprojx in MDK_ARM folder.
 
 Make sure you cut the tracks ULPI_1 and 13 as specified in the build manual before flashing.
+
+To do:
+- AIFF support
+- MP3 support
+- USB playback
+- Hot cues
+- ?
