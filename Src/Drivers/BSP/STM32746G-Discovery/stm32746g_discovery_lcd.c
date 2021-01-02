@@ -90,8 +90,8 @@ uint8_t width15P[95]={
 5,
 10,
 5,
-7,
-6,
+11,
+9,
 2,
 4,
 4,
@@ -100,8 +100,8 @@ uint8_t width15P[95]={
 2,
 4,
 2,
-5,
-7,
+10,
+7,	
 4,
 7,
 7,
@@ -177,7 +177,7 @@ uint8_t width15P[95]={
 7,
 6,
 3,
-1,
+10,
 3,
 11
 }; 
@@ -227,7 +227,7 @@ static LTDC_HandleTypeDef  hLtdcHandler;
 static DMA2D_HandleTypeDef hDma2dHandler;
 
 /* Default LCD configuration with LCD Layer 1 */
-static uint32_t            ActiveLayer = 0;
+//static uint32_t            ActiveLayer = 0;
 static LCD_DrawPropTypeDef DrawProp[MAX_LAYER_NUMBER];
 /**
   * @}
@@ -715,6 +715,13 @@ void BSP_LCD_DisplayStringAt(uint16_t Xpos, uint16_t Ypos, uint8_t *Text, Text_A
 		  ref_column = Xpos;
 			TRANSPARENT_MODE_ENABLE = 1;
 			DisplayWidth = 266;
+      break;	
+		}		
+	case WAVEFORM_MODE:
+		{
+		  ref_column = Xpos;
+			TRANSPARENT_MODE_ENABLE = 1;
+			DisplayWidth = 414;
       break;	
 		}		
   case RIGHT_MODE:

@@ -10,7 +10,7 @@
   * inserted by the user or by software development tools
   * are owned by their respective copyright owners.
   *
-  * Copyright (c) 2018 STMicroelectronics International N.V. 
+  * Copyright (c) 2020 STMicroelectronics International N.V. 
   * All rights reserved.
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -68,8 +68,8 @@ void MX_DMA2D_Init(void)
   hdma2d.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB8888;
   hdma2d.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
   hdma2d.LayerCfg[1].InputAlpha = 0;
-  //hdma2d.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA;
-  //hdma2d.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR;
+//  hdma2d.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA;
+//  hdma2d.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR;
   if (HAL_DMA2D_Init(&hdma2d) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);

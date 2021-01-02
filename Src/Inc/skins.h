@@ -4427,6 +4427,24 @@ static uint16_t iSTAR[13] = {
 															};
 
 __attribute__((section(".qspi_data")))
+static uint16_t iSTAR_FILLED[13] = {
+												0x0000,
+												0x0000,
+												0x0000,
+												0x0200,
+												0x0200,
+												0x0F80,
+												0x3FE0,
+												0x1FC0,
+												0x0F80,
+												0x0F80,
+												0x1040,
+												0x0000,
+												0x0000
+															};
+															
+
+__attribute__((section(".qspi_data")))
 static uint16_t iDISC[13] = {
 												0x03C0,
 												0xEFF0,

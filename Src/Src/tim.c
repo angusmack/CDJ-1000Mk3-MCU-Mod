@@ -10,7 +10,7 @@
   * inserted by the user or by software development tools
   * are owned by their respective copyright owners.
   *
-  * Copyright (c) 2018 STMicroelectronics International N.V. 
+  * Copyright (c) 2020 STMicroelectronics International N.V. 
   * All rights reserved.
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -55,6 +55,8 @@
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim1;
+TIM_HandleTypeDef htim12;
+TIM_HandleTypeDef htim14;
 
 /* TIM1 init function */
 void MX_TIM1_Init(void)
@@ -89,6 +91,79 @@ void MX_TIM1_Init(void)
   }
 
 }
+/* TIM12 init function */
+void MX_TIM12_Init(void)
+{
+  TIM_ClockConfigTypeDef sClockSourceConfig;
+  TIM_OC_InitTypeDef sConfigOC;
+
+  htim12.Instance = TIM12;
+  htim12.Init.Prescaler = 24;
+  htim12.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim12.Init.Period = 255;
+  htim12.Init.ClockDivision = TIM_CLOCKDIVISION_DIV4;
+  htim12.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim12) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim12, &sClockSourceConfig) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  if (HAL_TIM_PWM_Init(&htim12) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 127;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim12, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  HAL_TIM_MspPostInit(&htim12);
+
+}
+/* TIM14 init function */
+void MX_TIM14_Init(void)
+{
+  TIM_OC_InitTypeDef sConfigOC;
+
+  htim14.Instance = TIM14;
+  htim14.Init.Prescaler = 24;
+  htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim14.Init.Period = 255;
+  htim14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV4;
+  htim14.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim14) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  if (HAL_TIM_PWM_Init(&htim14) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 200;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim14, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  HAL_TIM_MspPostInit(&htim14);
+
+}
 
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
 {
@@ -108,6 +183,73 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
 
   /* USER CODE END TIM1_MspInit 1 */
   }
+  else if(tim_baseHandle->Instance==TIM12)
+  {
+  /* USER CODE BEGIN TIM12_MspInit 0 */
+
+  /* USER CODE END TIM12_MspInit 0 */
+    /* TIM12 clock enable */
+    __HAL_RCC_TIM12_CLK_ENABLE();
+  /* USER CODE BEGIN TIM12_MspInit 1 */
+
+  /* USER CODE END TIM12_MspInit 1 */
+  }
+  else if(tim_baseHandle->Instance==TIM14)
+  {
+  /* USER CODE BEGIN TIM14_MspInit 0 */
+
+  /* USER CODE END TIM14_MspInit 0 */
+    /* TIM14 clock enable */
+    __HAL_RCC_TIM14_CLK_ENABLE();
+  /* USER CODE BEGIN TIM14_MspInit 1 */
+
+  /* USER CODE END TIM14_MspInit 1 */
+  }
+}
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
+{
+
+  GPIO_InitTypeDef GPIO_InitStruct;
+  if(timHandle->Instance==TIM12)
+  {
+  /* USER CODE BEGIN TIM12_MspPostInit 0 */
+
+  /* USER CODE END TIM12_MspPostInit 0 */
+    /**TIM12 GPIO Configuration    
+    PH6     ------> TIM12_CH1 
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_6;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF9_TIM12;
+    HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
+
+  /* USER CODE BEGIN TIM12_MspPostInit 1 */
+
+  /* USER CODE END TIM12_MspPostInit 1 */
+  }
+  else if(timHandle->Instance==TIM14)
+  {
+  /* USER CODE BEGIN TIM14_MspPostInit 0 */
+
+  /* USER CODE END TIM14_MspPostInit 0 */
+  
+    /**TIM14 GPIO Configuration    
+    PA7     ------> TIM14_CH1 
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_7;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF9_TIM14;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /* USER CODE BEGIN TIM14_MspPostInit 1 */
+
+  /* USER CODE END TIM14_MspPostInit 1 */
+  }
+
 }
 
 void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
@@ -126,6 +268,28 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
   /* USER CODE BEGIN TIM1_MspDeInit 1 */
 
   /* USER CODE END TIM1_MspDeInit 1 */
+  }
+  else if(tim_baseHandle->Instance==TIM12)
+  {
+  /* USER CODE BEGIN TIM12_MspDeInit 0 */
+
+  /* USER CODE END TIM12_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_TIM12_CLK_DISABLE();
+  /* USER CODE BEGIN TIM12_MspDeInit 1 */
+
+  /* USER CODE END TIM12_MspDeInit 1 */
+  }
+  else if(tim_baseHandle->Instance==TIM14)
+  {
+  /* USER CODE BEGIN TIM14_MspDeInit 0 */
+
+  /* USER CODE END TIM14_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_TIM14_CLK_DISABLE();
+  /* USER CODE BEGIN TIM14_MspDeInit 1 */
+
+  /* USER CODE END TIM14_MspDeInit 1 */
   }
 } 
 

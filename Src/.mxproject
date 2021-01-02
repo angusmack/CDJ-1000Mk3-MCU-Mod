@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=C:/Keil_v5/Projects/My_Project/F7 XDJ_PANEL/Inc
+HeaderPath=C:/Keil_v5/My_Project/F7 XDJ_PANEL/Inc
 HeaderFiles=stm32f7xx_it.h;stm32f7xx_hal_conf.h;main.h;ffconf.h;bsp_driver_sd.h;fatfs.h;gpio.h;dma2d.h;fmc.h;i2c.h;ltdc.h;sai.h;sdmmc.h;usart.h;dma.h;tim.h;quadspi.h;spi.h;
-SourcePath=C:/Keil_v5/Projects/My_Project/F7 XDJ_PANEL/Src
+SourcePath=C:/Keil_v5/My_Project/F7 XDJ_PANEL/Src
 SourceFiles=stm32f7xx_it.h;stm32f7xx_hal_conf.h;main.h;stm32f7xx_it.c;stm32f7xx_hal_msp.c;main.c;ffconf.h;bsp_driver_sd.h;fatfs.h;bsp_driver_sd.c;fatfs.c;gpio.h;dma2d.h;fmc.h;i2c.h;ltdc.h;sai.h;sdmmc.h;usart.h;gpio.c;dma2d.c;fmc.c;i2c.c;ltdc.c;sai.c;sdmmc.c;usart.c;dma.h;dma.c;tim.h;tim.c;quadspi.h;quadspi.c;spi.h;spi.c;
 
 [PreviousLibFiles]

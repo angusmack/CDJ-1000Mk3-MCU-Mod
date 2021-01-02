@@ -4,7 +4,7 @@
   * @brief   Interrupt Service Routines.
   ******************************************************************************
   *
-  * COPYRIGHT(c) 2018 STMicroelectronics
+  * COPYRIGHT(c) 2020 STMicroelectronics
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -74,6 +74,7 @@ void SysTick_Handler(void)
 /**
 * @brief This function handles TIM1 update interrupt and TIM10 global interrupt.
 */
+
 
 /**
 * @brief This function handles EXTI line[15:10] interrupts.

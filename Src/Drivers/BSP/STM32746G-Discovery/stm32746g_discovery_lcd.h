@@ -83,6 +83,8 @@ typedef struct
   int16_t Y;
 }Point, * pPoint; 
    
+static uint32_t            ActiveLayer = 0;				/////////////////////////////////////
+
 /** 
   * @brief  Line mode structures definition  
   */ 
@@ -92,7 +94,8 @@ typedef enum
   RIGHT_MODE              = 0x02,    /* Right mode  */
   LEFT_MODE               = 0x03,     /* Left mode   */
 	TRANSPARENT_MODE        = 0x04,     /* transparent mode   */
-	INFO_MODE        				= 0x05     /* transparent+info mode*/
+	INFO_MODE        				= 0x05,     /* transparent+info mode*/
+	WAVEFORM_MODE        		= 0x06,     /* transparent mode+waveform mode   */
 }Text_AlignModeTypdef;
 
 /**
